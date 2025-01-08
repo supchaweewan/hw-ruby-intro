@@ -4,27 +4,31 @@
 
 def sum(arr)
   result = 0
-  if arr == 0
-    puts 0
+  if arr.empty? == true
+    return 0
   else
     for i in arr do
       result += i
     end
-    puts result
+    return result
   end
 end
 
 def max_2_sum(arr)
   result = 0
-  count = 0 
-  arr.sort! {|first_num, second_num| second_num <=> first_num}
-  arr.each {|num|
-    result += num
-    count += 1 
-    break if count == 2 
-  }
-  puts result
+  if arr.length < 2
+    if arr.empty? == true
+      return 0
+    else
+      return arr[0]
+    end
   
+  else
+    
+    result = arr.sort[-1] + arr.sort[-2]
+  
+    return result
+  end
 end
 
 def sum_to_n?(arr, n)
@@ -32,15 +36,14 @@ def sum_to_n?(arr, n)
     for j in (i+1)..arr.length-1 do
       result = arr[i] + arr[j]
       if result == n 
-        puts "True"
-        
+        return true
       end
       break if result == n
     end
     break if result == n
   end
   if result != n
-    puts "False"
+    return false
   end
 end
 
@@ -48,12 +51,12 @@ end
 # Part 2
 
 def hello(name)
-  puts "Hello, #{name}"
+  return "Hello, #{name}"
 end
 
 def starts_with_consonant?(s)
   if s == ''
-    puts false
+    return false
   else
     test = s.downcase
     startA = test.start_with?('a')
@@ -62,18 +65,24 @@ def starts_with_consonant?(s)
     startO = test.start_with?('o')
     startU = test.start_with?('u')
     if startA == true or startE == true or startI == true or startO == true or startU == true 
-      puts false 
+      return false
+    elsif s[0].match?(/^[b-df-hj-np-tv-z]/i) == false
+      return false 
     else 
-      puts true
+      return true
     end
   end
 end
 
 def binary_multiple_of_4?(s)
-  if s.match /^(0|^[01]*00)$/ 
-    puts true
-  else 
-    puts false
+  if s.empty? || s.match?(/[a-zA-Z\W3-9*]/)
+    return false
+  elsif s == "0"
+    return true
+  elsif s.to_i % 4 == 0
+    return true
+  else
+    return false
   end
 end
 
