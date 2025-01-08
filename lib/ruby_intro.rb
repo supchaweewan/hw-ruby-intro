@@ -89,16 +89,18 @@ end
 # Part 3
 
 class BookInStock
-  def initialize(isbn, price)
-    raise ArgumentError, "ISBN cannot be empty" if isbn.empty?
-    raise ArgumentError, "Price must not be zero or lower" if price <= 0
-    @isbn = isbn
-    @price = price.to_f 
+  attr_accessor :isbn, :price
 
+  def initialize(isbn, price)
+    raise ArgumentError, 'ISBN number cannot be empty' if isbn.empty?
+    raise ArgumentError, 'Price must be greater than zero' if price <= 0
+
+    @isbn = isbn
+    @price = price
   end
 
   def price_as_string
-    puts "$#{@price}"
+    format('$%.2f', price)
   end
 end
 
